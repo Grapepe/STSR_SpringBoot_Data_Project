@@ -1,18 +1,18 @@
-package com.example.demo.Entities;
+package com.example.demo.Entities.GameEntities;
 
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "genres")
-public class Genre
+public class  Genre
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "genre_title", unique = true, length = 100)
+    @Column(name = "genre_title", nullable = false, unique = true, length = 100)
     private String title;
 
     protected Genre() {}

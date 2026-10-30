@@ -1,4 +1,4 @@
-package com.example.demo.Entities;
+package com.example.demo.Entities.GameEntities;
 
 
 import jakarta.persistence.*;
@@ -15,12 +15,17 @@ public class Company
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "c_name", nullable = false)
+    @Column(name = "company_name", nullable = false)
     private String name;
+
+    @Column(name = "company_website")
+    private String websiteUrl;
+
+    @Column(name = "company_country")
+    private String country;
 
     @OneToMany(mappedBy = "company")
     private List<Game> games = new ArrayList<>();
-
 
 
     protected Company()
@@ -55,5 +60,23 @@ public class Company
 
     public void setGames(List<Game> games) {
         this.games = games;
+    }
+
+    public void addGame(Game game) {
+        games.add(game);
+        game.setCompany(this);
+    }
+
+    public void removeGame(Game game) {
+        games.remove(game);
+        game.setCompany(null);
+    }
+
+    public String getWebsiteUrl() {
+        return websiteUrl;
+    }
+
+    public void setWebsiteUrl(String websiteUrl) {
+        this.websiteUrl = websiteUrl;
     }
 }
