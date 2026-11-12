@@ -3,10 +3,7 @@ import com.example.demo.Entities.GameEntities.Game;
 import com.example.demo.Enums.GameResourceType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,9 +34,12 @@ public class GameResource
     @JoinColumn(name = "media_asset_id")
     private MediaAsset mediaAsset;
 
-    public GameResource(String title, String externalUrl)
+    public GameResource(String title, String externalUrl, GameResourceType type, Game game, MediaAsset mediaAsset)
     {
         this.title = title;
         this.externalUrl = externalUrl;
+        this.type = type;
+        this.game = game;
+        this.mediaAsset = mediaAsset;
     }
 }
