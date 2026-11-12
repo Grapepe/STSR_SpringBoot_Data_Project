@@ -33,14 +33,11 @@ public class Game
     @Column(name = "game_release_year")
     private Integer releaseYear;
 
-    @Column(name = "cover_url")
-    private String coverUrl;
-
     @Column(name = "official_website")
     private String officialWebUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "game_company")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "game_company", nullable = false)
     private Company company;
 
     @OneToMany(mappedBy = "game")

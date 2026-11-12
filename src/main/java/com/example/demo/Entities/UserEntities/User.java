@@ -4,6 +4,7 @@ import com.example.demo.Entities.GameEntities.Favorite;
 import com.example.demo.Entities.GameEntities.Review;
 import com.example.demo.Entities.ProjectEntites.DesignProject;
 import com.example.demo.Enums.UserRole;
+import com.example.demo.Enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,10 @@ public class User
     @Column(name = "register_date", nullable = false)
     private LocalDate regDate;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_status", nullable = false)
+    private UserStatus status = UserStatus.ACTIVE;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_personal_info", unique = true)
     private Person personalInfo;
@@ -52,9 +58,15 @@ public class User
     @OneToMany(mappedBy = "user")
     private List<Favorite> favorites = new ArrayList<>();
 
+
     public User(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        regDate = LocalDate.now();
     }
 }

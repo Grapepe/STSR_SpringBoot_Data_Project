@@ -22,6 +22,7 @@ public class Platform
     @Column(name = "platform_name", nullable = false, unique = true, length = 100)
     private String platformName;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "platform_type")
     private PlatformType platformType;
 

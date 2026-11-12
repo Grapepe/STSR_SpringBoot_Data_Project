@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -21,7 +23,7 @@ public class DesignProject
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "project_title")
+    @Column(name = "project_title", nullable = false)
     private String title;
 
     @Column(name = "project_description")
@@ -33,23 +35,36 @@ public class DesignProject
     @Column(name = "resource_url")
     private String resourceUrl;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "last_update")
+    @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate;
 
-    @ManyToOne
-    @JoinColumn(name = "project_user")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "project_user", nullable = false)
     private User user;
 
-    public DesignProject(String title, String description, String text, String resourceUrl, LocalDateTime createdAt, LocalDateTime lastUpdate)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectItem> items = new ArrayList<>();
+
+    public DesignProject(String title, String description, String text, String resourceUrl, User user)
     {
         this.title = title;
         this.description = description;
         this.text = text;
         this.resourceUrl = resourceUrl;
-        this.createdAt = createdAt;
-        this.lastUpdate = lastUpdate;
+        this.user = user;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        lastUpdate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdate = LocalDateTime.now();
     }
 }

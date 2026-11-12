@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "favorites")
+@Table(name = "favorites", uniqueConstraints = {@UniqueConstraint(columnNames = {"fav_user", "fav_game"})})
 public class Favorite
 {
     @Id
@@ -27,12 +27,12 @@ public class Favorite
     @Column(name = "personal_rating")
     private Integer personalRating;
 
-    @ManyToOne
-    @JoinColumn(name = "fav_user")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fav_user", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "fav_game")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fav_game", nullable = false)
     private Game game;
 
     public Favorite(LocalDateTime addedAt, Integer personalRating)

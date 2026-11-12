@@ -17,19 +17,22 @@ public class ProjectItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "project_item_id", nullable = false)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "project_item_title",nullable = false)
     private String title;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "project_item_type", nullable = false)
     private ProjectItemType type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id", nullable = false)
     private DesignProject project;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "media_asset_id")
     private MediaAsset mediaAsset;
+
 }
