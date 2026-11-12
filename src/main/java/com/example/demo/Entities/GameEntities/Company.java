@@ -2,10 +2,15 @@ package com.example.demo.Entities.GameEntities;
 
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "companies")
 public class Company
@@ -27,39 +32,9 @@ public class Company
     @OneToMany(mappedBy = "company")
     private List<Game> games = new ArrayList<>();
 
-
-    protected Company()
-    {
-
-    }
-
     public Company(String name)
     {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Game> getGames() {
-        return games;
-    }
-
-    public void setGames(List<Game> games) {
-        this.games = games;
     }
 
     public void addGame(Game game) {
@@ -70,13 +45,5 @@ public class Company
     public void removeGame(Game game) {
         games.remove(game);
         game.setCompany(null);
-    }
-
-    public String getWebsiteUrl() {
-        return websiteUrl;
-    }
-
-    public void setWebsiteUrl(String websiteUrl) {
-        this.websiteUrl = websiteUrl;
     }
 }

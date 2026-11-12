@@ -5,11 +5,18 @@ import com.example.demo.Entities.GameEntities.Review;
 import com.example.demo.Entities.ProjectEntites.DesignProject;
 import com.example.demo.Enums.UserRole;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "users")
 public class User
@@ -45,43 +52,9 @@ public class User
     @OneToMany(mappedBy = "user")
     private List<Favorite> favorites = new ArrayList<>();
 
-    protected User() {}
-
     public User(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Person getPersonalInfo() {
-        return personalInfo;
-    }
-
-    public void setPersonalInfo(Person personalInfo) {
-        this.personalInfo = personalInfo;
     }
 }

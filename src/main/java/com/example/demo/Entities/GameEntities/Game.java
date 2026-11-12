@@ -2,12 +2,19 @@ package com.example.demo.Entities.GameEntities;
 
 import com.example.demo.Entities.Assets.GameResource;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "games")
 public class Game
@@ -55,16 +62,13 @@ public class Game
     @JoinTable(name = "game_mechanics",
             joinColumns = @JoinColumn(name = "game_id"),
             inverseJoinColumns = @JoinColumn(name = "mechanic_id"))
-    private Set<Mechanics> mechanics = new HashSet<>();
+    private Set<Mechanic> mechanics = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "game_platforms",
                 joinColumns = @JoinColumn(name = "game_id"),
                 inverseJoinColumns = @JoinColumn(name = "platform_id"))
     private Set<Platform> platforms = new HashSet<>();
-
-
-    protected Game() {}
 
     public Game(String title, String description, Integer releaseYear, Company company)
     {
@@ -74,53 +78,6 @@ public class Game
         this.company = company;
     }
 
-    public Integer getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(Integer releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public Set<Genre> getGenres() {
-        return genres;
-    }
-
-    public Set<Mechanics> getMechanics() {
-        return mechanics;
-    }
     public void addGenre(Genre genre) {
         genres.add(genre);
     }
@@ -129,27 +86,11 @@ public class Game
         genres.remove(genre);
     }
 
-    public void addMechanic(Mechanics mechanic) {
+    public void addMechanic(Mechanic mechanic) {
         mechanics.add(mechanic);
     }
 
-    public void removeMechanic(Mechanics mechanic) {
+    public void removeMechanic(Mechanic mechanic) {
         mechanics.remove(mechanic);
-    }
-
-    public String getCoverUrl() {
-        return coverUrl;
-    }
-
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
-    }
-
-    public String getOfficialWebUrl() {
-        return officialWebUrl;
-    }
-
-    public void setOfficialWebUrl(String officialWebUrl) {
-        this.officialWebUrl = officialWebUrl;
     }
 }

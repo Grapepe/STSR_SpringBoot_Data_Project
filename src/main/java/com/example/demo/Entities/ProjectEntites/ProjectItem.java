@@ -3,7 +3,14 @@ package com.example.demo.Entities.ProjectEntites;
 import com.example.demo.Entities.Assets.MediaAsset;
 import com.example.demo.Enums.ProjectItemType;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "project_items")
 public class ProjectItem {

@@ -2,7 +2,12 @@ package com.example.demo.Entities.GameEntities;
 
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.*;
 
+@Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "genres")
 public class  Genre
@@ -15,27 +20,9 @@ public class  Genre
     @Column(name = "genre_title", nullable = false, unique = true, length = 100)
     private String title;
 
-    protected Genre() {}
-
     public Genre(String title)
     {
         this.title = title;
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

@@ -1,13 +1,17 @@
 package com.example.demo.Entities.GameEntities;
 
 import com.example.demo.Entities.UserEntities.User;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
-import org.springframework.cglib.core.Local;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "favorites")
 public class Favorite
@@ -31,35 +35,9 @@ public class Favorite
     @JoinColumn(name = "fav_game")
     private Game game;
 
-    protected Favorite() {}
-
     public Favorite(LocalDateTime addedAt, Integer personalRating)
     {
         this.addedAt = addedAt;
-        this.personalRating = personalRating;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getAddedAt() {
-        return addedAt;
-    }
-
-    public void setAddedAt(LocalDateTime addedAt) {
-        this.addedAt = addedAt;
-    }
-
-    public Integer getPersonalRating() {
-        return personalRating;
-    }
-
-    public void setPersonalRating(Integer personalRating) {
         this.personalRating = personalRating;
     }
 }
