@@ -67,4 +67,10 @@ public class DesignProject
     protected void onUpdate() {
         lastUpdate = LocalDateTime.now();
     }
+
+    public void addItem(ProjectItem item)
+    {
+        items.add(item);
+        item.setProject(this);
+    }
 }

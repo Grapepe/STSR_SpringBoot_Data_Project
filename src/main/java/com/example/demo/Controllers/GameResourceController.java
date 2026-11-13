@@ -19,7 +19,7 @@ public class GameResourceController
 
     @PostMapping(value = "/{gameId}/resources", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadResource(@PathVariable Long gameId,
-                                            @RequestParam("file")MultipartFile
+                                            @RequestParam("file") MultipartFile file,
                                             @RequestParam String title,
                                             @RequestParam GameResourceType type)
     {

@@ -35,9 +35,15 @@ public class Favorite
     @JoinColumn(name = "fav_game", nullable = false)
     private Game game;
 
-    public Favorite(LocalDateTime addedAt, Integer personalRating)
+    public Favorite(Integer personalRating, User user, Game game)
     {
-        this.addedAt = addedAt;
         this.personalRating = personalRating;
+        this.user = user;
+        this.game = game;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        addedAt = LocalDateTime.now();
     }
 }

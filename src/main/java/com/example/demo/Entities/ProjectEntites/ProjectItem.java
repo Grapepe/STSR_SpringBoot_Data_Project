@@ -35,4 +35,11 @@ public class ProjectItem {
     @JoinColumn(name = "media_asset_id")
     private MediaAsset mediaAsset;
 
+    public ProjectItem(String title, ProjectItemType type, DesignProject project, MediaAsset mediaAsset)
+    {
+        this.title = title;
+        this.type = type;
+        this.project = project;
+        this.mediaAsset = mediaAsset;
+    }
 }

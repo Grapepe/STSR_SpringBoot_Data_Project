@@ -23,13 +23,13 @@ public class Platform
     private String platformName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "platform_type")
+    @Column(name = "platform_type", nullable = false)
     private PlatformType platformType;
 
-    @Column(name = "release_year")
-    private int releaseYear;
+    @Column(name = "release_year", nullable = false)
+    private Integer releaseYear;
 
-    public Platform(String platformName, PlatformType platformType, int releaseYear)
+    public Platform(String platformName, PlatformType platformType, Integer releaseYear)
     {
         this.platformName = platformName;
         this.platformType = platformType;

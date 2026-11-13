@@ -44,13 +44,11 @@ public class Review
     @JoinColumn(name = "review_user", nullable = false)
     private User user;
 
-    public Review(String title, String text, Integer rating, LocalDateTime createdAt, LocalDateTime updatedAt, User user, Game game)
+    public Review(String title, String text, Integer rating, User user, Game game)
     {
         this.title = title;
         this.text = text;
         this.rating = rating;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.user = user;
         this.game = game;
     }
