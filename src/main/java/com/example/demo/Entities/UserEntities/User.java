@@ -126,26 +126,37 @@ public class User
         }
     }
 
-    public void addProject(DesignProject project) {
-        projects.add(project);
-        project.setUser(this);
-    }
-
     public void removeProject(DesignProject project)
     {
         projects.remove(project);
     }
 
+    public void addProject(DesignProject project) {
+        if (project == null || projects.contains(project)) {
+            return;
+        }
+
+        projects.add(project);
+        project.setUser(this);
+    }
+
     public void addReview(Review review) {
+        if (review == null || reviews.contains(review)) {
+            return;
+        }
+
         reviews.add(review);
         review.setUser(this);
     }
 
     public void addFavorite(Favorite favorite) {
+        if (favorite == null || favorites.contains(favorite)) {
+            return;
+        }
+
         favorites.add(favorite);
         favorite.setUser(this);
     }
-
     public void removeReview(Review review)
     {
         reviews.remove(review);

@@ -37,12 +37,9 @@ public class Person {
     @Column(name = "bio", columnDefinition = "TEXT")
     private String bio;
 
-    // Inverse side of User-Person relationship
-
     @OneToOne(mappedBy = "personalInfo")
     private User user;
 
-    // Constructor
 
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
@@ -50,6 +47,12 @@ public class Person {
     }
 
     void assignUser(User user) {
+        if (this.user != null && user != null && this.user != user) {
+            throw new IllegalStateException(
+                    "Personal information is already assigned to another user"
+            );
+        }
+
         this.user = user;
     }
 
